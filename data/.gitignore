@@ -1,0 +1,11 @@
+__pycache__/
+*.pyc
+*.pyo
+.env
+.venv/
+data/cifar-10-batches-py/
+*.h5
+*.pt
+*.pth
+.ipynb_checkpoints/
+models/*.weights
