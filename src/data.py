@@ -3,19 +3,15 @@ import numpy as np
 
 def load_cifar10(batch_size=128, augment=True):
     (x_train, y_train), (x_test, y_test) = tf.keras.datasets.cifar10.load_data()
-    
     x_train = x_train.astype("float32") / 255.0
     x_test  = x_test.astype("float32") / 255.0
 
-    # Standard CIFAR-10 mean/std
     mean = np.array([0.4914, 0.4822, 0.4465], dtype=np.float32)
     std  = np.array([0.2470, 0.2435, 0.2616], dtype=np.float32)
     x_train = (x_train - mean) / std
     x_test  = (x_test  - mean) / std
-
     y_train = tf.keras.utils.to_categorical(y_train, 10)
     y_test  = tf.keras.utils.to_categorical(y_test, 10)
-
     train_ds = tf.data.Dataset.from_tensor_slices((x_train, y_train))
     test_ds  = tf.data.Dataset.from_tensor_slices((x_test, y_test))
 

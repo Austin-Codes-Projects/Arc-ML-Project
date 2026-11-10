@@ -21,17 +21,13 @@ def residual_mixer_block(x, channels, kernel_size=5):
 
 def build_model(channels=128, depth=6, kernel_size=5, num_classes=10):
     inputs = layers.Input(shape=(32, 32, 3))
-
-    # Stem
     x = layers.Conv2D(channels, 3, strides=2, padding="same", use_bias=False)(inputs)
     x = layers.BatchNormalization()(x)
     x = layers.Activation("relu")(x)
 
-    # Residual mixer blocks
     for _ in range(depth):
         x = residual_mixer_block(x, channels, kernel_size)
-
-    # Classification head
+        
     x = layers.GlobalAveragePooling2D()(x)
     outputs = layers.Dense(num_classes, activation="softmax")(x)
 

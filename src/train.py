@@ -6,7 +6,6 @@ from src.data import load_cifar10
 def main():
     print("Loading CIFAR-10...")
     train_ds, test_ds = load_cifar10(batch_size=128, augment=True)
-
     print("Building model...")
     model = build_model(channels=128, depth=6, kernel_size=5)
     print(f"Total parameters: {model.count_params():,}")
@@ -51,7 +50,6 @@ def main():
         epochs=150,
         callbacks=callbacks
     )
-
     print("\nFinal evaluation on test set:")
     loss, acc = model.evaluate(test_ds)
     print(f"Test accuracy: {acc * 100:.2f}%")
